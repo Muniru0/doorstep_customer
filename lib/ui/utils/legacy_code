@@ -1,0 +1,743 @@
+
+
+
+    Material(
+                    elevation: 10.0,
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                      width: _w * 0.9,
+                    
+                      padding: EdgeInsets.symmetric(vertical: 13.0,horizontal: 15.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color:brightMainColor,
+                      ),
+                        child:   Material(
+                    elevation: 10.0,
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                      width: _w * 0.9,
+                    
+                      padding: EdgeInsets.symmetric(vertical: 13.0,horizontal: 15.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Text('Add Manager',style: TextStyle(color:white,fontSize: 13.5,fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  
+                    ),
+                  ),
+                  
+  
+  
+  
+  
+  Future<Map> storeNewUserInfo(MyUser user, String password) async {
+    try {
+      
+      user.dateJoined = DateTime.now().millisecondsSinceEpoch;
+      user.lastSigninTime = DateTime.now().millisecondsSinceEpoch;
+
+      WriteBatch _batch = _firebaseFirestore.batch();
+
+      var userID = '${user.fullname.split(' ')[0]}_${DateTime.now().microsecondsSinceEpoch}';
+       
+      //  user.firestoreDocID = userID;
+
+      // store the user information in cloud firestore
+      _batch.set(_firebaseFirestore.doc('${Constants.USERS_FS_COL}/$userID'),
+          user.toMap());
+
+      // update the user document ID with the user firebase ID
+      _batch.update(_firebaseFirestore.doc('${Constants.USERS_FS_COL}/$userID'),
+          {MyUserDataModel.FIREBASE_UID: userID});
+
+      // update the number of signups
+      _batch.update(_firebaseFirestore.doc('${Constants.COMPANY_FS_COL}/stats'),
+          {'signups': FieldValue.increment(1)});
+
+      await _batch.commit();
+
+     
+      await SecureStorage.storePassword(password);
+      return {'result': true, 'desc': user};
+      
+    } catch (e) {
+      print(e);
+      await _authService.deleteUser();
+      return {
+        'result': false,
+        'desc':
+            'Error creating account, ignore any verification link you might have received and try again later.'
+      };
+    }
+  }
+
+
+  // Future<Map> uploadImage(
+  //     {imageSource = '1',
+  //     remoteDir = ''}) async {
+  //   // pick image
+  //   var pickImageRes = await _baseUploader.pickImage(source: imageSource);
+  //   if (pickImageRes['desc'] == null) {
+  //     return pickImageRes;
+  //   }
+
+  //   // if the file has being successfully processed
+  //   if (pickImageRes['result']) {
+  //     var uploadRes =
+  //         await startUpload(file: pickImageRes['desc'], remoteDir: remoteDir);
+  //     if (uploadRes['result']) {
+  //       return {
+  //         'result': true,
+  //         'desc':
+  //             '${uploadRes['desc']}${Constants.MY_UNIQUE_SALT}${pickImageRes['desc'].path}'
+  //       };
+  //     }
+  //   }
+  //   return pickImageRes;
+  // }
+
+
+   //  getParcelsWidget(),
+                                    //   Container(
+                                    //   width: _w,
+                                    //   height: _h * 0.35,
+
+                                    //   child: ListView(
+                                    //     shrinkWrap: true,
+                                    //     children: [
+                                    //       SizedBox(height: 20.0),
+                                    //       parcelItemWidget(onTap: (){
+                                    //         Navigator.pushNamed(context, Constants.PARCEL_DETAILS_ROUTE);
+                                    //       }),
+                                    //       SizedBox(height: 20.0),
+                                    //       parcelItemWidget(onTap: (){
+                                    //         Navigator.pushNamed(context, Constants.PARCEL_DETAILS_ROUTE);
+                                    //       }),
+                                    //       SizedBox(height: 20.0),
+                                    //       parcelItemWidget(onTap: (){
+                                    //         Navigator.pushNamed(context, Constants.PARCEL_DETAILS_ROUTE);
+                                    //       }),
+                                    //   //      onGoingTaskWidget(type: OnGoingTask.DELIVERY, title: 'Yussif Muniru', desc: 'Delivering parcel: 20234232', extra : "₵ 43" ),
+                                    //   // onGoingTaskWidget(type: OnGoingTask.DELIVERY, title: 'Yussif Muniru', desc: 'Delivering parcel: 20234232', extra : "₵ 43" ),
+                                    //   //  onGoingTaskWidget(type: OnGoingTask.DELIVERY, title: 'Yussif Muniru', desc: 'Delivering parcel: 20234232', extra : "₵ 43" ),
+                                    //   //   onGoingTaskWidget(type: OnGoingTask.DELIVERY, title: 'Yussif Muniru', desc: 'Delivering parcel: 20234232', extra : "₵ 43" ),
+                                    //   //    onGoingTaskWidget(type: OnGoingTask.DELIVERY, title: 'Yussif Muniru', desc: 'Delivering parcel: 20234232', extra : "₵ 43" ),
+                                    //   //     onGoingTaskWidget(type: OnGoingTask.DELIVERY, title: 'Yussif Muniru', desc: 'Delivering parcel: 20234232', extra : "₵ 43" ),
+
+                                    //     ],
+                                    //   ),
+                                    // ),
+
+                                          bottomNavigationBar: BubbleBottomBar(
+        opacity: .2,
+        currentIndex: curIndex,
+        onTap: _onItemTapped,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+        elevation:40,
+        hasInk: true, //new, gives a cute ink effect
+        inkColor: Colors.black12, //optional, uses theme color if not specified
+        items: <BubbleBottomBarItem>[
+          BubbleBottomBarItem(backgroundColor: Color(0xFFE8F5E9),activeIcon: Icon(Icons.dashboard, color: primaryColor,), icon: Icon(Icons.dashboard, color: primaryColor,), title: Text("Home", style: TextStyle(color: Color(0xFF2dc733)))),
+
+          BubbleBottomBarItem(backgroundColor: Color(0xFFE8F5E9),activeIcon: Icon(Feather.send, color:primaryColor), icon:  Icon(Feather.send, color:primaryColor),title: Text("Sends")),
+
+          BubbleBottomBarItem(backgroundColor: Color(0xFFE8F5E9), activeIcon: Transform.rotate(angle:3.1513866664,child: Icon(Feather.send , color:primaryColor)) , icon: Transform.rotate(angle:3.1513866664,child: Icon(Feather.send , color:primaryColor)),title: Text("Receives",style: TextStyle(color:Color(0xFF2dc733)))),
+
+          BubbleBottomBarItem(backgroundColor: Color(0xFFE8F5E9), activeIcon: Icon(Feather.bar_chart, color:primaryColor) , icon:  Icon(Feather.bar_chart, color:primaryColor),title: Text("tab",style: TextStyle(color:Color(0xFF2dc733)))),
+
+        ],
+      ),
+
+
+import 'package:Business4pay/models/courier_company_model.dart';
+import 'package:Business4pay/ui/base_route.dart';
+import 'package:Business4pay/ui/utils/colors_and_icons.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:simple_animations/simple_animations.dart';
+
+class WaitingCompanyAuthorizationRoute extends StatefulWidget {
+  const WaitingCompanyAuthorizationRoute({ Key? key }) : super(key: key);
+
+  @override
+  _WaitingCompanyAuthorizationRouteState createState() => _WaitingCompanyAuthorizationRouteState();
+}
+
+class _WaitingCompanyAuthorizationRouteState extends State<WaitingCompanyAuthorizationRoute> {
+  
+  late double _w;
+  late double _h;
+  @override
+  Widget build(BuildContext context) {
+
+    _w = MediaQuery.of(context).size.width;
+    _h = MediaQuery.of(context).size.height;
+    return BaseView<CompanyModel>(
+      
+      isBlankBaseRoute: true,
+      child:Container(
+        width:_w,
+        height: _h,
+        child: Column(
+          children: [
+            Stack(
+             // alignment: Alignment.center,
+             clipBehavior: Clip.none,
+              children: [
+
+                      MirrorAnimation<double>(
+                  tween: Tween(begin: 0.3,end: 0.1),
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: 1500),
+                  builder: (context, child,value) {
+                    return Container(
+                        width: _w,
+                        height: _h * 0.7,
+                        // padding: EdgeInsets.all(_h * 0.5),
+                        //child: Container(),
+                      decoration: BoxDecoration(
+                        color: baseRouteBackgroundColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          // color:Colors.green[50]!.withOpacity(value),
+                          color:brightMainColor.withOpacity(value),
+                          width: 10 ),
+                      ),
+                    );
+                  }
+                ),
+                   MirrorAnimation<double>(
+                  tween: Tween(begin: 1.0,end: 0.6),
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: 1500),
+                  builder: (context, child,value) {
+                    return Container(
+                       width:_h * 0.3,
+                       height: _h * 0.3,
+                     
+                      decoration: BoxDecoration(
+                        color: baseRouteBackgroundColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color:Colors.green[100]!.withOpacity(value),width: 10 ),
+                      ),
+                    );
+                  }
+                ),
+                   MirrorAnimation<double>(
+                  tween: Tween(begin: 1.0,end: 0.6),
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: 1500),
+                  builder: (context, child,value) {
+                    return Container(
+                        width: _w * 0.2,
+                        height: _w * 0.2,
+                      
+                      decoration: BoxDecoration(
+                        color:baseRouteBackgroundColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color:Colors.green[400]!.withOpacity(value),width: 15 ),
+                      ),
+                    );
+                  }
+                ),
+
+
+            
+              
+            // Container(
+                //   margin: EdgeInsets.only(top:30,bottom: 15.0),
+                //   child: Text('Awaiting Director Approval',style: TextStyle(color: brightMainColor,fontSize: 20.0,fontWeight: FontWeight.bold)),
+                // ),
+               
+            //   InkWell(
+            //     onTap: (){
+                 
+               
+            //     },
+
+            // child: Container(
+            // width: _w,
+            // height: 50.0,
+
+            // alignment: Alignment.center,
+            // padding: EdgeInsets.symmetric(vertical: 12.0),
+            // decoration: BoxDecoration(
+            //   color:primaryColor,
+            //   borderRadius: BorderRadius.circular(5.0),
+            //     ),
+            //     margin: EdgeInsets.only(bottom: 30.0,left: 20.0, right: 20.0),
+            //     child: Text('Check Approval', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12.0,color: white )),
+            //   ),
+            // ),
+                 
+                      Row(
+                      children:[
+                   
+                        Container(
+                           margin: EdgeInsets.only(left: 20.0),
+                          child:Text('dStep',style: TextStyle(color: warmPrimaryColor.withOpacity(0.8),fontSize: 15.0))
+                        ),
+                        Expanded(child: SizedBox()),
+                        Container(
+                          margin: EdgeInsets.only(right: 20.0),
+                          child: Icon(AntDesign.menuunfold,color: brightMainColor.withOpacity(0.8),size: 20.0),
+                        ),
+                      ],
+                                 ),
+                   
+                
+     
+      
+              ],
+            ),
+          ],
+        ),
+      ),
+      
+    );
+  }
+}
+
+
+
+
+import 'package:Business4pay/constants/constants.dart';
+import 'package:Business4pay/model_registry.dart';
+import 'package:Business4pay/models/company_branch_model.dart';
+import 'package:Business4pay/models/courier_company_model.dart';
+import 'package:Business4pay/ui/base_route.dart';
+import 'package:Business4pay/ui/utils/colors_and_icons.dart';
+import 'package:Business4pay/ui/utils/validators.dart';
+import 'package:Business4pay/ui/utils/widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:validators/validators.dart';
+
+
+
+class AddCourierCompanyBranchRoute extends StatefulWidget {
+  @override
+  _AddCourierCompanyBranchRouteState createState() => _AddCourierCompanyBranchRouteState();
+}
+
+class _AddCourierCompanyBranchRouteState extends State<AddCourierCompanyBranchRoute> {
+  late double _w;
+  late double _h;
+  late bool _showBlurredOverlay;
+  late String errorText;
+
+  TextEditingController branchNameController = TextEditingController();
+  TextEditingController townOrCityController = TextEditingController();
+  TextEditingController branchManagerNameController = TextEditingController();
+  TextEditingController managerEmailController = TextEditingController();
+  TextEditingController managerPhoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  late bool _carDeliveryVehicleSelected;
+  late bool _bikeDeliveryVehicleSelected;
+
+  TextEditingController baseParcelPrice = TextEditingController();
+
+  late String _branchNameErrorText;
+
+  late String _managerEmailErrorText;
+
+  late String _managerPhoneErrorText;
+
+  late String _townOrCityErrorText;
+  late String _managerNameErrorText;
+
+  late String _addressErrorText;
+  late CompanyBranchModel _courierCompanyBranchModel;
+  late  CompanyModel _companyModel;
+  var _managerGender;
+
+
+
+  @override
+  initState(){
+    super.initState();
+    _showBlurredOverlay = false;
+    errorText = '';
+    _companyModel = register<CompanyModel>();
+    _managerGender = 'Male';
+    _courierCompanyBranchModel = register<CompanyBranchModel>();
+    _branchNameErrorText = '';
+    _managerNameErrorText = '';
+    _managerEmailErrorText = '';
+    _managerPhoneErrorText = '';
+    _townOrCityErrorText = '';
+    _addressErrorText = '';
+
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _w  = MediaQuery.of(context).size.width;
+    _h = MediaQuery.of(context).size.height;
+    return BaseView<CompanyBranchModel>(
+        isBlankBaseRoute: true,
+        showBlurredOverlay: _showBlurredOverlay,
+        child:
+        Container(
+        width: _w,
+        height: _h ,
+        color: Color(0xFFf5fafe),
+
+    child:ListView(
+      shrinkWrap: true,
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 10.0,top:20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+
+              Row(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      if(Navigator.canPop(context)){
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: Container(
+
+                      alignment: Alignment.centerLeft ,
+
+                      child: Icon(Feather.arrow_left, color: primaryColor,),),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0),
+                    child: Text('Branch Details', style: TextStyle(color: primaryColor,fontSize: 13.0, fontWeight: FontWeight.bold)),
+                  ),
+                ],
+              ),
+
+               InkWell(
+                    onTap: (){
+                       Navigator.pushNamed(context, Constants.ALL_BRANCHES_ROUTE);
+                      },
+                 child: Row(
+                  children: [
+                    
+                    Container(
+                      margin: EdgeInsets.only(left: 10.0),
+                      child: Text('Branches ', style: TextStyle(color: primaryColor,fontSize: 13.0, fontWeight: FontWeight.bold)),
+                    ),
+               
+                    
+                      Container(
+               
+                        alignment: Alignment.centerLeft ,
+                        margin:EdgeInsets.only(right: 5.0),
+                        child: Icon(Feather.arrow_right, color: primaryColor,),),
+                   
+                   
+                  ],
+                             ),
+               ),
+
+
+            ],
+          ),
+        ),
+
+     
+
+        AnimatedContainer(
+          curve: Curves.easeInOut,
+          duration: Duration(milliseconds: 500),
+          margin: EdgeInsets.only(bottom: errorText.isEmpty ? 0.0: 20.0),
+          child: Text(errorText,style: TextStyle(color: errorColor,fontSize: 13.0,fontWeight: FontWeight.bold)),
+        ),
+
+        Container(
+          width: _w,
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(15.0),
+          margin: EdgeInsets.only(bottom: 20),
+          child: Stack(
+            alignment: Alignment.center,
+            children:[
+              Container(
+                width: _w * 0.2,
+                height: _w * 0.2,
+            
+                decoration: BoxDecoration(    
+                  color: lightMainColor,
+                  borderRadius: BorderRadius.circular((_w * 0.2) / 2),
+                  ),
+              ),
+
+              Container(
+                child: Icon(
+                  FontAwesome.building_o,
+                   size: 20.0,
+                  color: brightMainColor
+                )
+              )
+            ]
+          ),
+        ),
+        Stack(
+          children: [
+            Container(
+              width: _w,
+              height: _h * 0.84,
+              child: Column(
+
+                
+                children: [
+
+                  inputField(branchNameController, icon: FontAwesome.building_o ,hint: 'Branch name',error: _branchNameErrorText,onChanged: (String managerName){
+
+                  }),
+             
+                  inputField(managerEmailController, icon: Feather.mail,hint: 'Manager Email',error: _managerEmailErrorText,onChanged: (String managerName){
+
+                  }),
+
+                 inputField(managerPhoneController, icon: Feather.phone,hint: 'Manager Phone Number',error: _managerPhoneErrorText,onChanged: (String managerName){
+
+                  }),
+
+                  Row(
+
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 15.0,right: 7.0),
+                  child: Icon(Ionicons.transgender_outline,color: primaryColor.withOpacity(0.5),size:20.0) ),
+                
+
+              
+                  Column(
+                    children: [
+                     Row(
+                       children: [
+                         Container(child: Text('M\t\t : ',style: TextStyle(color: _managerGender == 'Male' ? brightMainColor : black),)),
+                         Container(
+                           margin: EdgeInsets.only(right: 7.0),
+                           child: Text(
+                             '\t\tF',style: TextStyle(color: _managerGender == 'Female' ? brightMainColor : black),
+
+                           ),
+                         ),
+                       ]                     ),
+                      UtilityWidgets.toggleButton(enable: !(_managerGender == 'Male'),enableAction: (){
+                        
+                        setState(() {
+                        _managerGender = 'Male';  
+                        });
+
+                      },disableAction: (){
+                           setState(() {
+                              _managerGender = 'Female';  
+                        });
+                      }),
+                   
+                    ],
+                  ),
+
+
+
+              ]
+          ),
+                 
+                    
+                    SizedBox(height: 10.0,),
+                   inputField(townOrCityController, icon: Feather.navigation,hint: 'town or city',error:_townOrCityErrorText,onChanged: (String managerName){
+
+                  }),
+
+                   inputField(addressController, icon: Feather.navigation_2,hint: 'Address',error: _addressErrorText,onChanged: (String managerName){
+
+                  }),
+
+
+
+                Container(
+                margin:EdgeInsets.only(),
+                child: UtilityWidgets.customConfirmationButton(context, () async{ 
+
+                var inputValid =   validateInput();
+                if(!inputValid){
+                  return;
+                }
+                // show loadig gif
+                 UtilityWidgets.requestProcessingDialog(context,);
+
+               // send request to add a branch  
+               Map branchAdditionResponse =  await _courierCompanyBranchModel.addCompanyBranch(companyFirestoreID:_companyModel.getCompany.companyFirestoreID,branchName: branchNameController.text,managerEmail: managerEmailController.text,managerPhone: managerPhoneController.text,townOrCity: townOrCityController.text, address: addressController.text,directorFirebaseUid:_companyModel.getCompany.directorFirebaseUid);
+             
+                Navigator.pop(context);
+
+                
+                if(!branchAdditionResponse['result']){
+                  UtilityWidgets.requestErrorDialog(context,desc: branchAdditionResponse['desc'],title: 'Operation',cancelAction: (){
+                    Navigator.pop(context);
+                  }, cancelText: 'Ok');
+                  return;
+                }
+                FocusScope.of(context).unfocus();
+                
+                UtilityWidgets.requestSuccessDialog(context,title: 'Branch Addtion',desc: 'Branch Successfully added',cancelAction: (){
+                 branchNameController.clear();
+                 branchManagerNameController.clear();
+                 managerEmailController.clear();
+                 managerPhoneController.clear();
+                 townOrCityController.clear();
+                 addressController.clear();
+                 FocusScope.of(context).unfocus();
+                  Navigator.pop(context);
+                  
+                },cancelText: 'Ok');
+                },confirmationText: 'Add Branch',isLong: true)
+              ),
+
+
+                ],),
+            ),
+
+
+
+          ],
+        ),
+
+
+
+     
+     SizedBox(height: _h * 0.1)
+      
+      ],
+    ) ));
+  }
+
+  bool validateInput(){
+
+
+    _branchNameErrorText = '';
+    _managerNameErrorText = '';
+    _managerPhoneErrorText = '';
+    _managerEmailErrorText = '';
+    _townOrCityErrorText = '';
+    _addressErrorText = '';
+    
+      if(branchNameController.text.trim().isEmpty || branchNameController.text.trim().length <= 3){
+              _branchNameErrorText = 'Invalid branch name';
+          }
+   if(validateSeparatedWords(branchManagerNameController.text)  == false){
+           _managerNameErrorText = 'Please provide full name without special characters.';
+        }  
+         if(validateSeparatedWords(branchManagerNameController.text)  == null){
+           _managerNameErrorText = "Manager name can't be blank";
+        }  
+      if(!isEmail(managerEmailController.text) ){
+              _managerEmailErrorText = 'Invalid email address';
+      
+      }
+
+      
+
+      if(!isNumeric(managerPhoneController.text) || managerPhoneController.text.trim().length != 10 || !managerPhoneController.text.startsWith("0")){
+              _managerPhoneErrorText = 'Phone must be 10 digits and starts with zero';
+          } 
+
+      if(validateSeparatedWords(townOrCityController.text) == false){
+        print('Inside the false statement ${townOrCityController.text}');
+            _townOrCityErrorText = 'Please town or city name has to be only letters';
+          }
+      if(validateSeparatedWords(townOrCityController.text) == null){
+        
+            _townOrCityErrorText = "Town or city can't be blank.";
+      }
+
+      if(addressController.text.trim().length < 3){
+            _addressErrorText = 'Please provide a valid address.';
+
+        }
+       
+
+  if(_branchNameErrorText.isNotEmpty || _managerEmailErrorText.isNotEmpty || _managerPhoneErrorText.isNotEmpty || _townOrCityErrorText.isNotEmpty || _addressErrorText.isNotEmpty ){
+    setState((){  });
+    return false;
+  }
+return true;
+  
+
+
+
+  }
+
+ 
+  Widget inputField(controller,{icon = Feather.briefcase,error = '', hint = '',onChanged}){
+    return  Container(
+      width: _w,
+      margin: EdgeInsets.symmetric(vertical:15.0 ,horizontal: 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 7.0),
+                  child:icon != null ? Icon(icon,color: brightMainColor,size:15.0) :   Icon(Feather.map_pin,color: brightMainColor ,size:15.0),
+                ),
+
+                Container(
+                  width: _w * 0.8,
+
+                  decoration: BoxDecoration(
+                    border: Border(bottom:error.isEmpty ? BorderSide(width: 0.3, color: fadedHeadingsColor) : BorderSide(width: 0.3, color: errorColor)),
+                  ),
+                  padding: EdgeInsets.only(right: 5.0,bottom: 5.0), child: TextField(
+                  keyboardType: TextInputType.name ,
+                  controller: controller,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: warmPrimaryColor,
+                    fontSize: 12.5,
+                    fontWeight : FontWeight.bold,
+                  ),
+
+                  cursorColor: warmPrimaryColor,
+                  decoration: InputDecoration.collapsed(
+                    hintText: hint,
+                    hintStyle: TextStyle(
+                      color: warmPrimaryColor.withOpacity(0.7),
+                      fontSize: 11,
+                    ),
+                  ),
+                  onChanged:onChanged ,
+                ),
+                ),
+
+                
+
+
+
+              ]
+          ),
+          Container(
+            child: Text(error, style: TextStyle(color: errorColor,fontSize: 13.0))
+                ),
+        ],
+      ),
+    );
+
+
+
+  }
+
+
+
+}
+
+
+

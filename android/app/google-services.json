@@ -1,0 +1,283 @@
+{
+  "project_info": {
+    "project_number": "20548221002",
+    "firebase_url": "https://doorsteppay-50730.firebaseio.com",
+    "project_id": "doorsteppay-50730",
+    "storage_bucket": "doorsteppay-50730.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20548221002:android:332a52b552136e3879ceb3",
+        "android_client_info": {
+          "package_name": "com.doorstep.doorstep_customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20548221002-d2uk9sc3kt569p9q3vh7uirltgupanmf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doorstep.doorstep_customer",
+            "certificate_hash": "fc78353aafa41db7736097916556b0ab078c8164"
+          }
+        },
+        {
+          "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk36iUjjmidbLPzlzkKl1QN-j5qU5qhVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20548221002-5m2f9br1nm70hncv02kb6klva7ikc357.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.Business4pay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20548221002:android:81896621fe15ded779ceb3",
+        "android_client_info": {
+          "package_name": "com.doorstep.doorstep_delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20548221002-5cdholk5vt5ftomlg2udhlkkf9gs308e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doorstep.doorstep_delivery",
+            "certificate_hash": "fc78353aafa41db7736097916556b0ab078c8164"
+          }
+        },
+        {
+          "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk36iUjjmidbLPzlzkKl1QN-j5qU5qhVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20548221002-5m2f9br1nm70hncv02kb6klva7ikc357.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.Business4pay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20548221002:android:50ed8761c22b6df479ceb3",
+        "android_client_info": {
+          "package_name": "com.doorstep.doorsteppay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20548221002-0vd9gkgkblsl779biqqjun8qrs4lhfp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doorstep.doorsteppay",
+            "certificate_hash": "7ba6bc34e3629971d2a4845d98f9eb34f860ecfa"
+          }
+        },
+        {
+          "client_id": "20548221002-co7lmjskvr36qj37vro3n41m6hp1gvl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doorstep.doorsteppay",
+            "certificate_hash": "218208c39b99e108125d5f1abdfa28fe6330eb0e"
+          }
+        },
+        {
+          "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk36iUjjmidbLPzlzkKl1QN-j5qU5qhVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20548221002-5m2f9br1nm70hncv02kb6klva7ikc357.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.Business4pay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20548221002:android:c45bc9997d3d8ca579ceb3",
+        "android_client_info": {
+          "package_name": "com.example.Business4pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20548221002-bjgsvvtk6uovhemvurj72nvqtl3gfji2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Business4pay",
+            "certificate_hash": "7ba6bc34e3629971d2a4845d98f9eb34f860ecfa"
+          }
+        },
+        {
+          "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk36iUjjmidbLPzlzkKl1QN-j5qU5qhVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20548221002-5m2f9br1nm70hncv02kb6klva7ikc357.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.Business4pay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20548221002:android:00a067794e30a91879ceb3",
+        "android_client_info": {
+          "package_name": "com.example.Customer4pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20548221002-35hiu68crl8mu9fovl9r7p5d168m0bo7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Customer4pay",
+            "certificate_hash": "7ba6bc34e3629971d2a4845d98f9eb34f860ecfa"
+          }
+        },
+        {
+          "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk36iUjjmidbLPzlzkKl1QN-j5qU5qhVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20548221002-5m2f9br1nm70hncv02kb6klva7ikc357.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.Business4pay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20548221002:android:388a41bf36acb37e79ceb3",
+        "android_client_info": {
+          "package_name": "com.example.recipes_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20548221002-n749jmoihk8j65fj2lv2l868mshsu4if.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.recipes_app",
+            "certificate_hash": "9cd48b7af1935a7c0702bd4eceb31cf8919b31b2"
+          }
+        },
+        {
+          "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk36iUjjmidbLPzlzkKl1QN-j5qU5qhVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20548221002-b2ba4fd6ie7gtj1vkl5rse4bj3b35gsh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20548221002-5m2f9br1nm70hncv02kb6klva7ikc357.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.Business4pay"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
